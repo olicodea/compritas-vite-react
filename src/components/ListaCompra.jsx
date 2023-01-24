@@ -1,4 +1,4 @@
-function ListaCompra() {
+function ListaCompra({ listaCompra }) {
   return (
     <div className="table-responsive">
       <table className="table">
@@ -11,14 +11,28 @@ function ListaCompra() {
             <th>Promo</th>
             <th>Desc.</th>
           </tr>
-          <tr>
-            <td>*</td>
-            <td>Aceite girasol</td>
-            <td>$370</td>
-            <td>10</td>
-            <td>2x1</td>
-            <td>15%</td>
-          </tr>
+          {listaCompra && listaCompra.length ? (
+            <>
+              {listaCompra.map((paciente) => {
+                return (
+                  <tr key={paciente.descripcion}>
+                    <td>*</td>
+                    <td>{paciente.descripcion}</td>
+                    <td>{paciente.precio}</td>
+                    <td>{paciente.cant}</td>
+                    <td>{paciente.promo}</td>
+                    <td>{paciente.descuento}%</td>
+                  </tr>
+                );
+              })}
+            </>
+          ) : (
+            <>
+              <tr>
+              <td><h5>No hay datos</h5></td>
+              </tr>
+            </>
+          )}
         </tbody>
       </table>
     </div>
